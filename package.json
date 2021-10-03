@@ -4,7 +4,8 @@
   "description": "Terry owes me 100$ by 1/12/2020",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+     "start":"node index.js"
   },
   "author": "Skeeyeet_The_king",
   "license": "ISC",

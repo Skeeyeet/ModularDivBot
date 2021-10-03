@@ -1,0 +1,21 @@
+{
+  "name": "discord-bot",
+  "version": "1.0.0",
+  "description": "Terry owes me 100$ by 1/12/2020",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Skeeyeet_The_king",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/opus": "^0.6.0",
+    "discord.js": "^12.5.1",
+    "ffmpeg-static": "^4.4.0",
+    "node-fetch": "^2.6.1",
+    "steam-price-api": "^2.0.0",
+    "yt-search": "^2.10.1",
+    "ytdl": "^1.4.1",
+    "ytdl-core": "^4.9.1"
+  }
+}

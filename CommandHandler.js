@@ -22,6 +22,9 @@ const commands = {
     },
     leave:function(message,args){
         Leave(message);
+    },
+    test:function(message,args){
+        message.channel.send("test");
     }
 }
 

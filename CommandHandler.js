@@ -5,6 +5,7 @@ const PlayMusicCommand = require("./Commands/PlayMusicCommand");
 const PlayUrlMusic = require('./Commands/PlayUrlMusicCommand');
 const Leave = require('./Commands/LeaveChannel');
 const MusicHandler = require('./Commands/MusicHandler');
+const AddArray = require('./Commands/AddInvest');
 const prefix = '-';
 
 const commands = {
@@ -26,6 +27,9 @@ const commands = {
     },
     test:function(message,args){
         message.channel.send("testing");
+    },
+    addarray:function(message,args){
+        message.channel.send(AddArray(message,args));
     }
 }
 

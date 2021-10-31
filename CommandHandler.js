@@ -3,7 +3,8 @@ const State = require('./Commands/StateCommand');
 const HelpCommand = require('./Commands/HelpCommand');
 const PlayMusicCommand = require("./Commands/PlayMusicCommand");
 const PlayUrlMusic = require('./Commands/PlayUrlMusicCommand');
-const Leave = require('./Commands/LeaveChannel')
+const Leave = require('./Commands/LeaveChannel');
+const MusicHandler = require('./Commands/MusicHandler');
 const prefix = '-';
 
 const commands = {
@@ -13,9 +14,9 @@ const commands = {
     help:function(message,args){
         HelpCommand(message);
     },
-    play:function(message,args){
+    play:async function(message,args){
         args = args.join('');
-        PlayMusicCommand(message,args);
+        var video = await PlayMusicCommand(message,args);
     },
     playurl:function(message,args){
         PlayUrlMusic(message,args[0]);
@@ -24,7 +25,7 @@ const commands = {
         Leave(message);
     },
     test:function(message,args){
-        message.channel.send("test");
+        message.channel.send("testing");
     }
 }
 

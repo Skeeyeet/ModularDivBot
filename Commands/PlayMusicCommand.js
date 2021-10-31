@@ -17,4 +17,5 @@ module.exports = async function Playmusic(message,link) {
         });
         await message.reply('Playing: ' + video.title);
     }
+    return video;
 }

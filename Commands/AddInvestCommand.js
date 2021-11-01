@@ -12,7 +12,9 @@ module.exports = async function AddInvest(message, args) {
     const result = await client.db("Discord").collection("InvestmentStates").findOne({ User: message.author.id });
     var id = await client.db("Discord").collection("InvestmentStates").count();
 
-    await fetch("https://api.nomics.com/v1/currencies/ticker?key="+process.env.NOMICSKEY+"=" + args[0].toUpperCase() + "&interval=1d,30d&convert=AUD&per-page=100&page=1")
+    try
+    {
+        await fetch("https://api.nomics.com/v1/currencies/ticker?key="+process.env.NOMICSKEY+"=" + args[0].toUpperCase() + "&interval=1d,30d&convert=AUD&per-page=100&page=1")
         .then(res => res.json())
         .then((json) => {
             if (json.length == 0) {
@@ -20,7 +22,11 @@ module.exports = async function AddInvest(message, args) {
                 sendmessage(message, "Invalid coin name", message.author.id);
             }
         })
-
+    }
+    catch{
+        valid = false;
+        message.channel.send("something went wrong with fetch function in add invest");
+    }
     if (args[1] == null) {
         sendmessage(message, "Please included the price you brought at spaced after the coin name", message.author.id);
         valid = false;

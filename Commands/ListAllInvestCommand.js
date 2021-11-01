@@ -12,11 +12,15 @@ module.exports = async function ListAllInvestCommand(message, args) {
     var currentstring = "";
     for (i = 0; i < loops; i++) {
         currentstring = "";
-        await fetch("https://api.nomics.com/v1/currencies/ticker?key="+process.env.NOMICSKEY+"=" + result.CurrencyName[i] + "&interval=1d,30d&convert=AUD&per-page=100&page=1")
+        try{await fetch("https://api.nomics.com/v1/currencies/ticker?key="+process.env.NOMICSKEY+"=" + result.CurrencyName[i] + "&interval=1d,30d&convert=AUD&per-page=100&page=1")
             .then(res => res.json())
             .then((json) => {
                 currentprice = json[0].price;
             })
+        }
+        catch{
+            message.channel.send("something went wrong inside of the listallinvestfunction");
+        }
         var calculatedprice = currentprice - result.Price[i];
         calculatedprice = calculatedprice / result.Price[i] * 100;
         calculatedprice = Math.round(calculatedprice);

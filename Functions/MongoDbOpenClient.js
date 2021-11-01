@@ -1,5 +1,6 @@
 const {MongoClient} = require('mongodb');
-const mongouri = "mongodb+srv://Joshua:Jesse1926@discord.9zjtl.mongodb.net/test";
+require("dotenv").config();
+const mongouri = process.env.DATABASE;
 
 
 module.exports = async function MongoDbOpenClient(message) {

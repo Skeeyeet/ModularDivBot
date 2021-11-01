@@ -1,9 +1,9 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-
+require("dotenv").config();
 
 module.exports = async function CheckInvestments(message,messagetosend,userid) {
-    await client.login('NzgzMTkzMzYwMjgxMTA4NTMx.X8XLqA.SVSxfCYshbiE9ih1TtqAxyappUk');
+    await client.login(process.env.DISCORDBOT);
     await client.users.fetch(userid,false).then((user)=>{
         user.send(messagetosend);
     })

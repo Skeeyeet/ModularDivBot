@@ -2,7 +2,7 @@ const opendb = require('./MongoDbOpenClient');
 var timerset = false;
 const fetch = require('node-fetch');
 const sendmessage = require('./SendUserPrivateMessage');
-
+require("dotenv").config();
 module.exports = async function CheckInvestments(message) {
     
     interval = setInterval(async function () {
@@ -18,7 +18,7 @@ module.exports = async function CheckInvestments(message) {
                 for (j = 0; j < loops2; j++) {
     
                     console.log(name.CurrencyName[j]);
-                    await fetch("https://api.nomics.com/v1/currencies/ticker?key=ae6b3678033c54ecec3b3dbed41bfbf97c46abaf&ids=" + name.CurrencyName[j] + "&interval=1d,30d&convert=AUD&per-page=100&page=1")
+                    await fetch("https://api.nomics.com/v1/currencies/ticker?key="+process.env.NOMICSKEY+"=" + name.CurrencyName[j] + "&interval=1d,30d&convert=AUD&per-page=100&page=1")
                         .then(res => res.json())
                         .then((json) => {
                             currentprice = json[0].price;

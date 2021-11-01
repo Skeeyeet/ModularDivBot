@@ -2,6 +2,8 @@
 const MongoDbOpenClient = require('../Functions/MongoDbOpenClient')
 const sendmessage = require('../Functions/SendUserPrivateMessage');
 const fetch = require('node-fetch');
+require('dotenv').config();
+
 
 module.exports = async function AddInvest(message, args) {
     const client = await MongoDbOpenClient(message);
@@ -9,7 +11,7 @@ module.exports = async function AddInvest(message, args) {
     const result = await client.db("Discord").collection("InvestmentStates").findOne({ User: message.author.id });
     var id = await client.db("Discord").collection("InvestmentStates").count();
 
-    await fetch("https://api.nomics.com/v1/currencies/ticker?key=ae6b3678033c54ecec3b3dbed41bfbf97c46abaf&ids=" + args[0].toUpperCase() + "&interval=1d,30d&convert=AUD&per-page=100&page=1")
+    await fetch("https://api.nomics.com/v1/currencies/ticker?key="+process.env.NOMICSKEY+"=" + args[0].toUpperCase() + "&interval=1d,30d&convert=AUD&per-page=100&page=1")
         .then(res => res.json())
         .then((json) => {
             if (json.length == 0) {
@@ -17,7 +19,7 @@ module.exports = async function AddInvest(message, args) {
                 sendmessage(message, "Invalid coin name", message.author.id);
             }
         })
-        
+
     if (args[1] == null) {
         sendmessage(message, "Please included the price you brought at spaced after the coin name", message.author.id);
         valid = false;

@@ -1,7 +1,7 @@
 const MongoDbOpenClient = require('../Functions/MongoDbOpenClient')
 const sendmessage = require('../Functions/SendUserPrivateMessage');
 const fetch = require('node-fetch');
-
+require("dotenv").config();
 module.exports = async function ListAllInvestCommand(message, args) {
     const client = await MongoDbOpenClient(message);
     const result = await client.db("Discord").collection("InvestmentStates").findOne({ User: message.author.id });
@@ -10,7 +10,7 @@ module.exports = async function ListAllInvestCommand(message, args) {
     var currentstring = "";
     for (i = 0; i < loops; i++) {
         currentstring = "";
-        await fetch("https://api.nomics.com/v1/currencies/ticker?key=ae6b3678033c54ecec3b3dbed41bfbf97c46abaf&ids=" + result.CurrencyName[i] + "&interval=1d,30d&convert=AUD&per-page=100&page=1")
+        await fetch("https://api.nomics.com/v1/currencies/ticker?key="+process.env.NOMICSKEY+"=" + result.CurrencyName[i] + "&interval=1d,30d&convert=AUD&per-page=100&page=1")
             .then(res => res.json())
             .then((json) => {
                 currentprice = json[0].price;

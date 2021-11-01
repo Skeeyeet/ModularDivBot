@@ -15,16 +15,19 @@ module.exports = async function CheckInvestments(message) {
                 var name = await client.db("Discord").collection("InvestmentStates").findOne({ id: i });
                 var loops2 = name.CurrencyName.length;
                 var currentprice;
-                await sendmessage(message, "doing the loop that breaks", name.User);
+               
                 for (j = 0; j < loops2; j++) {
 
                     console.log(name.CurrencyName[j]);
-                    await fetch("https://api.nomics.com/v1/currencies/ticker?key=" + process.env.NOMICSKEY + "=" + name.CurrencyName[j] + "&interval=1d,30d&convert=AUD&per-page=100&page=1")
+                   try{ await fetch("https://api.nomics.com/v1/currencies/ticker?key=" + process.env.NOMICSKEY + "=" + name.CurrencyName[j] + "&interval=1d,30d&convert=AUD&per-page=100&page=1")
                         .then(res => res.json())
                         .then((json) => {
                             currentprice = json[0].price;
                         })
-
+                    }
+                    catch{
+                        //await sendmessage(message, "Might be some kind of error with " + name.CurrencyName[j], name.User);
+                    }
                     var calculatedprice = currentprice - name.Price[j];
                     calculatedprice = calculatedprice / name.Price[j] * 100;
                     calculatedprice = Math.round(calculatedprice);

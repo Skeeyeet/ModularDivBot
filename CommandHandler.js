@@ -27,8 +27,9 @@ const commands = {
     leave:function(message,args){
         Leave(message);
     },
-    test:function(message,args){
+    test:async function(message,args){
         message.channel.send("testing");
+        await CheckInvestment(message);
     },
     addinvest:async function(message,args){
         await AddInvest(message,args);
@@ -41,7 +42,7 @@ const commands = {
 module.exports = async function CommandHandler(message) {
 
     AutomatedSale(message);
-    CheckInvestment(message);
+    
     if (!message.content.startsWith(prefix) || message.author.bot) return;
     const args = message.content.slice(prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();

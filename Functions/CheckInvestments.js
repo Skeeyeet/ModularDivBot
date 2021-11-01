@@ -50,5 +50,5 @@ module.exports = async function CheckInvestments(message) {
             client.close();
 
         
-    }, 3600000);
+    }, 60000);
 }

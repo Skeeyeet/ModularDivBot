@@ -7,8 +7,8 @@ const Leave = require('./Commands/LeaveChannel');
 const MusicHandler = require('./Commands/MusicHandler');
 const AddInvest = require('./Commands/AddInvestCommand');
 const prefix = '-';
-//const CheckInvestment = require('./Functions/CheckInvestments');
-//const ListAllInvest = require('./Commands/ListAllInvestCommand');
+const CheckInvestment = require('./Functions/CheckInvestments');
+const ListAllInvest = require('./Commands/ListAllInvestCommand');
 
 const commands = {
     state:function(message,args){
@@ -31,17 +31,17 @@ const commands = {
         message.channel.send("testing");
     },
     addinvest:async function(message,args){
-        //await AddInvest(message,args);
+        await AddInvest(message,args);
     },
     listallinvest:async function(message,args){
-        //await ListAllInvest(message,args);
+        await ListAllInvest(message,args);
     }
 }
 
 module.exports = async function CommandHandler(message) {
 
     AutomatedSale(message);
-    //CheckInvestment(message);
+    CheckInvestment(message);
     if (!message.content.startsWith(prefix) || message.author.bot) return;
     const args = message.content.slice(prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();

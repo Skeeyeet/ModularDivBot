@@ -6,6 +6,7 @@ require('dotenv').config();
 
 
 module.exports = async function AddInvest(message, args) {
+    message.channel.send("working");
     const client = await MongoDbOpenClient(message);
     var valid = true;
     const result = await client.db("Discord").collection("InvestmentStates").findOne({ User: message.author.id });

@@ -2,7 +2,9 @@ const MongoDbOpenClient = require('../Functions/MongoDbOpenClient')
 const sendmessage = require('../Functions/SendUserPrivateMessage');
 const fetch = require('node-fetch');
 require("dotenv").config();
+
 module.exports = async function ListAllInvestCommand(message, args) {
+    message.channel.send("working");
     const client = await MongoDbOpenClient(message);
     const result = await client.db("Discord").collection("InvestmentStates").findOne({ User: message.author.id });
     var loops = result.CurrencyName.length;

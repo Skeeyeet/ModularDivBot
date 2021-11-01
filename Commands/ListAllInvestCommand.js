@@ -19,7 +19,7 @@ module.exports = async function ListAllInvestCommand(message, args) {
             })
         }
         catch{
-            message.channel.send("something went wrong inside of the listallinvestfunction");
+            message.channel.send("something went wrong inside of the listallinvestfunction coin " + result.CurrencyName[i] + " may be incorrect");
         }
         var calculatedprice = currentprice - result.Price[i];
         calculatedprice = calculatedprice / result.Price[i] * 100;

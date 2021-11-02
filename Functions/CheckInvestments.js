@@ -46,10 +46,11 @@ async function loop2(loops2, name, i, currentprice,message) {
             var update = { "$set": {} };
             update["$set"]["Notified." + j] = calculatedprice + 10;
             try {
-                await client.db("Discord").collection("InvestmentStates").updateOne({ id: i }, update);
+               var result = await client.db("Discord").collection("InvestmentStates").updateOne({ id: i }, update);
+               sendmessage(message, result, "254917339810627584");
             }
             catch {
-               // sendmessage(message, "error occured at update positive", "254917339810627584");
+                sendmessage(message, "error occured at update positive", "254917339810627584");
             }
             sendmessage(message, 'Your investment ' + name.CurrencyName[j] + ' is up by ' + calculatedprice + "%", name.User);
         }
@@ -58,10 +59,11 @@ async function loop2(loops2, name, i, currentprice,message) {
             var update = { "$set": {} };
             update["$set"]["Notified." + j] = calculatedprice - 10;
             try {
-                await client.db("Discord").collection("InvestmentStates").updateOne({ id: i }, update);
+              var result =  await client.db("Discord").collection("InvestmentStates").updateOne({ id: i }, update);
+              sendmessage(message, result, "254917339810627584");
             }
             catch {
-                //sendmessage(message, "error occured at update negative", "254917339810627584");
+                sendmessage(message, "error occured at update negative", "254917339810627584");
             }
 
         }

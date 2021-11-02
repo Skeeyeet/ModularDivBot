@@ -7,18 +7,17 @@ module.exports = async function CheckInvestments(message) {
     interval = setInterval(async function () {
 
         console.log("running");
-        sendmessage(message, "runningloop", "254917339810627584");
         const client = await opendb(message);
         var loops = await client.db("Discord").collection("InvestmentStates").count();
-
         for (i = 0; i < loops; i++) {
+            sendmessage(message, "runningloop", "254917339810627584");
             var name = await client.db("Discord").collection("InvestmentStates").findOne({ id: i });
             var loops2 = name.CurrencyName.length;
             var currentprice;
             await loop2(loops2, name, i, currentprice)
         }
         client.close();
-    }, 3600000);
+    }, 3600000/2);
 
 }
 

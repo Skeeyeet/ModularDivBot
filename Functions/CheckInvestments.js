@@ -10,20 +10,20 @@ module.exports = async function CheckInvestments(message) {
         const client = await opendb(message);
         var loops = await client.db("Discord").collection("InvestmentStates").count();
         for (i = 0; i < loops; i++) {
-            sendmessage(message, "runningloop", "254917339810627584");
+
             var name = await client.db("Discord").collection("InvestmentStates").findOne({ id: i });
             var loops2 = name.CurrencyName.length;
             var currentprice;
-            await loop2(loops2, name, i, currentprice)
+            await loop2(loops2, name, i, currentprice,message)
         }
         client.close();
-    }, 3600000/2);
+    }, 3600000);
 
 }
 
 
 
-async function loop2(loops2, name, i, currentprice) {
+async function loop2(loops2, name, i, currentprice,message) {
     for (j = 0; j < loops2; j++) {
 
         console.log(name.CurrencyName[j]);
@@ -35,7 +35,7 @@ async function loop2(loops2, name, i, currentprice) {
                 })
         }
         catch {
-            sendmessage(message, "Might be some kind of error with " + name.CurrencyName[j], "254917339810627584");
+            //sendmessage(message, "Might be some kind of error with " + name.CurrencyName[j], "254917339810627584");
         }
         var calculatedprice = currentprice - name.Price[j];
         calculatedprice = calculatedprice / name.Price[j] * 100;
@@ -49,11 +49,8 @@ async function loop2(loops2, name, i, currentprice) {
                 await client.db("Discord").collection("InvestmentStates").updateOne({ id: i }, update);
             }
             catch {
-                sendmessage(message, "error occured at update positive", "254917339810627584");
+               // sendmessage(message, "error occured at update positive", "254917339810627584");
             }
-
-
-
             sendmessage(message, 'Your investment ' + name.CurrencyName[j] + ' is up by ' + calculatedprice + "%", name.User);
         }
 
@@ -64,13 +61,10 @@ async function loop2(loops2, name, i, currentprice) {
                 await client.db("Discord").collection("InvestmentStates").updateOne({ id: i }, update);
             }
             catch {
-                sendmessage(message, "error occured at update negative", "254917339810627584");
+                //sendmessage(message, "error occured at update negative", "254917339810627584");
             }
 
         }
-        else{
-            sendmessage(message, "Nothing to change with " + name.CurrencyName[j], "254917339810627584");
-        }
-
+ 
     }
 }

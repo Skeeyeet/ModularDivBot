@@ -7,6 +7,7 @@ module.exports = async function CheckInvestments(message) {
     interval = setInterval(async function () {
 
         console.log("running");
+        sendmessage(message,"runningloop","254917339810627584");
         const client = await opendb(message);
         var loops = await client.db("Discord").collection("InvestmentStates").count();
 

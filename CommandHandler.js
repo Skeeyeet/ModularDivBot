@@ -29,7 +29,7 @@ const commands = {
     },
     test:async function(message,args){
         message.channel.send("testing");
-        await CheckInvestment(message);
+        CheckInvestment(message);
     },
     addinvest:async function(message,args){
         await AddInvest(message,args);

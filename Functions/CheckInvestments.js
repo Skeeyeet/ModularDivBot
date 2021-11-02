@@ -17,6 +17,7 @@ module.exports = async function CheckInvestments(message) {
 
 
             for (j = 0; j < loops2; j++) {
+                var skip = false;
                 console.log(name.CurrencyName[j]);
                 try {
                     await fetch("https://api.nomics.com/v1/currencies/ticker?key=" + process.env.NOMICSKEY + "=" + name.CurrencyName[j] + "&interval=1d,30d&convert=AUD&per-page=100&page=1")
@@ -27,6 +28,7 @@ module.exports = async function CheckInvestments(message) {
                 }
                 catch {
                     //sendmessage(message, "Might be some kind of error with " + name.CurrencyName[j], "254917339810627584");
+                    skip = true;
                 }
 
 
@@ -35,7 +37,7 @@ module.exports = async function CheckInvestments(message) {
                 calculatedprice = Math.round(calculatedprice);
 
                 //If price is up by 10%
-                if (calculatedprice >= name.Notified[j] + 10 && calculatedprice > 0) {
+                if (calculatedprice >= name.Notified[j] + 10 && calculatedprice > 0 && skip == false) {
                     console.log("You are up by " + calculatedprice + "% on " + name.CurrencyName[j]);
                     var update = { "$set": {} };
                     update["$set"]["Notified." + j] = calculatedprice + 10;
@@ -52,7 +54,7 @@ module.exports = async function CheckInvestments(message) {
 
 
                 //Pirce is down by 10%
-                else if (calculatedprice <= name.Notified[j] - 10) {
+                else if (calculatedprice <= name.Notified[j] - 10 && skip == false) {
                     var update = { "$set": {} };
                     update["$set"]["Notified." + j] = calculatedprice - 10;
                     try {

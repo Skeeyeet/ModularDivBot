@@ -4,7 +4,12 @@ require("dotenv").config();
 
 module.exports = async function CheckInvestments(message,messagetosend,userid) {
     await client.login(process.env.DISCORDBOT);
-    await client.users.fetch(userid,false).then((user)=>{
-        user.send(messagetosend);
-    })
+    try{
+        await client.users.fetch(userid,false).then((user)=>{
+            user.send(messagetosend);
+        })
+    }
+    catch{
+
+    }
 }

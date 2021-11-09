@@ -19,18 +19,19 @@ module.exports = async function CheckInvestments(message) {
             for (j = 0; j < loops2; j++) {
                 var skip = false;
                 console.log(name.CurrencyName[j]);
-                try {
-                    await fetch("https://api.nomics.com/v1/currencies/ticker?key=" + process.env.NOMICSKEY + "=" + name.CurrencyName[j] + "&interval=1d,30d&convert=AUD&per-page=100&page=1")
-                        .then(res => res.json())
-                        .then((json) => {
-                            currentprice = json[0].price;
-                        })
-                }
-                catch {
-                    //sendmessage(message, "Might be some kind of error with " + name.CurrencyName[j], "254917339810627584");
-                    skip = true;
-                }
-
+                setTimeout(() => {
+                    try {
+                        await fetch("https://api.nomics.com/v1/currencies/ticker?key=" + process.env.NOMICSKEY + "=" + name.CurrencyName[j] + "&interval=1d,30d&convert=AUD&per-page=100&page=1")
+                            .then(res => res.json())
+                            .then((json) => {
+                                currentprice = json[0].price;
+                            })
+                    }
+                    catch {
+                        //sendmessage(message, "Might be some kind of error with " + name.CurrencyName[j], "254917339810627584");
+                        skip = true;
+                    } 
+                }, 5000);
 
                 var calculatedprice = currentprice - name.Price[j];
                 calculatedprice = calculatedprice / name.Price[j] * 100;

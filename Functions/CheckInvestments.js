@@ -19,7 +19,7 @@ module.exports = async function CheckInvestments(message) {
             for (j = 0; j < loops2; j++) {
                 var skip = false;
                 console.log(name.CurrencyName[j]);
-                setTimeout(() => {
+                setTimeout(async () => {
                     try {
                         await fetch("https://api.nomics.com/v1/currencies/ticker?key=" + process.env.NOMICSKEY + "=" + name.CurrencyName[j] + "&interval=1d,30d&convert=AUD&per-page=100&page=1")
                             .then(res => res.json())
@@ -32,7 +32,7 @@ module.exports = async function CheckInvestments(message) {
                         skip = true;
                     } 
                 }, 5000);
-
+                
                 var calculatedprice = currentprice - name.Price[j];
                 calculatedprice = calculatedprice / name.Price[j] * 100;
                 calculatedprice = Math.round(calculatedprice);

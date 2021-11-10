@@ -57,7 +57,7 @@ module.exports = async function CheckInvestments(message) {
                 //Pirce is down by 10%
                 else if (calculatedprice <= name.Notified[j] - 10 && skip == false) {
                     var update = { "$set": {} };
-                    update["$set"]["Notified." + j] = calculatedprice - 10;
+                    update["$set"]["Notified." + j] = calculatedprice - 5;
                     try {
                         await client.db("Discord").collection("InvestmentStates").updateOne({ id: i }, update);
 

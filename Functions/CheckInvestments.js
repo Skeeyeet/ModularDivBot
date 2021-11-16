@@ -47,7 +47,7 @@ module.exports = async function CheckInvestments(message) {
 
                     }
                     catch {
-                        sendmessage(message, "error occured at update positive", "254917339810627584");
+                        //sendmessage(message, "error occured at update positive", "254917339810627584");
 
                     }
                     sendmessage(message, 'Your investment ' + name.CurrencyName[j] + ' is up by ' + calculatedprice + "%", name.User);
@@ -63,7 +63,7 @@ module.exports = async function CheckInvestments(message) {
 
                     }
                     catch {
-                        sendmessage(message, "error occured at update negative", "254917339810627584");
+                        //sendmessage(message, "error occured at update negative", "254917339810627584");
 
                     }
 

@@ -9,17 +9,18 @@ module.exports = async function CheckInvestments(message) {
         console.log("running");
         const client = await opendb(message);
         var loops = await client.db("Discord").collection("InvestmentStates").count();
+        //Loops for how many entries are in the database
         for (i = 0; i < loops; i++) {
 
             var name = await client.db("Discord").collection("InvestmentStates").findOne({ id: i });
             var loops2 = name.CurrencyName.length;
             var currentprice;
 
-
+            //Loops for all currencies in the users data
             for (j = 0; j < loops2; j++) {
                 var skip = false;
                 console.log(name.CurrencyName[j]);
-                
+                //Call to nomics
                     try {
                         await fetch("https://api.nomics.com/v1/currencies/ticker?key=" + process.env.NOMICSKEY + "=" + name.CurrencyName[j] + "&interval=1d,30d&convert=AUD&per-page=100&page=1")
                             .then(res => res.json())
@@ -28,11 +29,11 @@ module.exports = async function CheckInvestments(message) {
                             })
                     }
                     catch {
-                        sendmessage(message, "Might be some kind of error with " + name.CurrencyName[j], "254917339810627584");
+                        //sendmessage(message, "Might be some kind of error with " + name.CurrencyName[j], "254917339810627584");
                         skip = true;
                     } 
                 
-                
+                //Math for working out percentage increase
                 var calculatedprice = currentprice - name.Price[j];
                 calculatedprice = calculatedprice / name.Price[j] * 100;
                 calculatedprice = Math.round(calculatedprice);
@@ -72,7 +73,7 @@ module.exports = async function CheckInvestments(message) {
             }
         }
         client.close();
-    }, 3600000);
+    }, 3600000/2);
 
 }
 // 3600000

@@ -19,10 +19,14 @@ const commands = {
         args = args.join('');
         await MusicHandler.play(message, args);
     },
+    playurl: async function (message, args) {
+        args = args.join('');
+        await MusicHandler.playurl(message, args);
+    },
     leave: function (message, args) {
         MusicHandler.leave(message);
     },
-    test: async function (message, args) {
+    tests: async function (message, args) {
         message.channel.send("testing");
         CheckInvestment(message);
     },

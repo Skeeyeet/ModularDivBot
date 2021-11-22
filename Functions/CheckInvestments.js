@@ -73,7 +73,7 @@ module.exports = async function CheckInvestments(message) {
             }
         }
         client.close();
-    }, 3600000/2);
+    }, 3600000);
 
 }
 // 3600000

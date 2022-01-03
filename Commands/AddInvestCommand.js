@@ -27,8 +27,8 @@ module.exports = async function AddInvest(message, args) {
         valid = false;
         message.channel.send("something went wrong with fetch function in add invest");
     }
-    if (args[1] == null) {
-        sendmessage(message, "Please included the price you brought at spaced after the coin name", message.author.id);
+    if (args[1] == null || isNaN(args[1])) {
+        sendmessage(message, "Please included the price you brought at spaced after the coin name or you have inputed something that isn't a number", message.author.id);
         valid = false;
     }
 

@@ -21,17 +21,18 @@ client.on('guildMemberSpeaking', async (member, speaking) => {
       } */
 });
 
-client.on('presenceUpdate', (oldPresence, newPresence) => {
-    // if someone else has updated their status, just return
-    if (newPresence.userId = '246807657971712002') {
-        message.channel.startTyping();
-        message.channel.send("Terry is online");
-        message.channel.stopTyping();
+client.on('presenceUpdate', async (oldPresence, newPresence) => {
+    try {
+        if (newPresence.userId = '246807657971712002') {
+            console.log(newPresence.status)
+            if (newPresence.status === 'online'){
+                const channel = await client.channels.fetch('736197116996747316')
+                channel.send('hello')
+            }
+        }        
+    } catch (error) {
+        console.log(error)
     }
-    // if it's not the status that has changed, just return
-    //if (oldPresence.status === newPresence.status) return;
-    // of if the new status is not online, again, just return
-    //if (newPresence.status !== 'online') return;
 
 });
 

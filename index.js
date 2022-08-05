@@ -23,10 +23,10 @@ client.on('guildMemberSpeaking', async (member, speaking) => {
 
 client.on('presenceUpdate', async (oldPresence, newPresence) => {
     try {
-        if (newPresence.userId === '246807657971712002') {
+        if (newPresence.userId === '254917339810627584') {
             console.log(newPresence.status)
             if (newPresence.status === 'online'){
-                const channel = await client.channels.fetch('736197116996747316')
+                const channel = await client.channels.fetch('783212024808079384')
                 channel.send('hello')
             }
         }        

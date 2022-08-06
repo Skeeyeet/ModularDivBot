@@ -3,7 +3,7 @@ const client = new Discord.Client({ intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD
 const CommandHandler = require('./CommandHandler');
 require("dotenv").config();
 client.on('message', CommandHandler)
-
+const pm = require('./Functions/SendUserPrivateMessage')
 
 
 
@@ -30,7 +30,7 @@ client.on('presenceUpdate', async (oldPresence, newPresence) => {
             console.log(newPresence.status)
             if (newPresence.status === 'online'){
                 const channel = await client.channels.fetch('736197116996747316')
-                channel.send('hello')
+                pm(null,'hello','254917339810627584')
             }
         }        
 });

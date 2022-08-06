@@ -22,18 +22,17 @@ client.on('guildMemberSpeaking', async (member, speaking) => {
 });
 
 client.on('presenceUpdate', async (oldPresence, newPresence) => {
-    try {
-        if (newPresence.userId === '246807657971712002') {
+
+    let idofpersononline = newPresence.userID
+    let idtocheck = '246807657971712002'
+
+        if (idofpersononline == idtocheck) {
             console.log(newPresence.status)
             if (newPresence.status === 'online'){
                 const channel = await client.channels.fetch('736197116996747316')
                 channel.send('hello')
             }
         }        
-    } catch (error) {
-        console.log(error)
-    }
-
 });
 
 

@@ -4,7 +4,8 @@ const ytSearch = require('yt-search');
 var MusicCommands = module.exports = {
 
     play: async function (message,link) {
-        const voiceChannel = message.member.voice.channel;
+        try {
+            const voiceChannel = message.member.voice.channel;
         if (!voiceChannel) return message.channel.send('not in a channel');
         if (!link.length) return message.channel.send('link is to short');
         var name = await ytSearch(link);
@@ -20,6 +21,10 @@ var MusicCommands = module.exports = {
             await message.reply('Playing: ' + video.title);
         }
         return video;
+        } catch (error) {
+            message.reply(error)
+        }
+       
     },
 
 
